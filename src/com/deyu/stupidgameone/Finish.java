@@ -2,7 +2,6 @@ package com.deyu.stupidgameone;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -76,7 +75,6 @@ public class Finish extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Intent it= new Intent();
 				GameInfo.GameSpeed=1;
 				GameInfo.GameStage=0;
@@ -90,12 +88,10 @@ public class Finish extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Intent it= new Intent();
 				it.setClass(Finish.this, MainActivity.class);
 				startActivity(it);
 				finish();
-				
 			}
 		});
 		

@@ -1,17 +1,15 @@
 package com.deyu.stupidgameone;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Matrix;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.os.HandlerThread;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -32,7 +30,6 @@ public class Game extends Activity {
 	Handler handler;
 	Boolean Countin = true;
 	TextView TV;
-	private Bitmap mOrgImage;
 	int gonextstep = 0;
 	int wherego = 1, lastgo = 1;
 	int x, y;
@@ -175,6 +172,7 @@ public class Game extends Activity {
 		x = (int) (Math.random() * (winwidth - button.getWidth()));
 		y = (int) ((Math.random() * (winheight - button.getHeight())));
 		button.setOnTouchListener(new OnTouchListener() {
+			@SuppressLint("ClickableViewAccessibility")
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN) { // 按下的時候
@@ -240,10 +238,6 @@ public class Game extends Activity {
 					if (wherego == 6 || wherego == 5 || wherego == 4) {
 						y = y - GameInfo.GameSpeed;
 					}
-					// layoutParams.leftMargin =x;
-					// layoutParams.topMargin=y;
-					float xx = (x / getResources().getDisplayMetrics().density);
-					float yy = (y / getResources().getDisplayMetrics().density);
 					layoutParams.leftMargin = x;
 					layoutParams.topMargin = y;
 					int sayw = sayTV.getWidth();
@@ -253,10 +247,6 @@ public class Game extends Activity {
 					layoutParams1.topMargin = y - sayTV.getHeight();
 					button.setLayoutParams(layoutParams);
 					sayTV.setLayoutParams(layoutParams1);
-
-					// Log.e("wherego",
-					// String.valueOf((getResources().getDisplayMetrics().density)));
-
 					alwaysrun();
 					if (x > (winwidth - button.getWidth())) {
 						shouldgoLeft();
