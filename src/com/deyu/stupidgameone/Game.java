@@ -65,11 +65,8 @@ public class Game extends Activity {
 				new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
-
 						startdia();
 						dialog.dismiss();
-
 					}
 
 				});
@@ -81,17 +78,13 @@ public class Game extends Activity {
 		gonextstep = 0;
 		GameInfo.GameStage++;
 		AlertDialog.Builder builder = new Builder(Game.this);
-
 		builder.setMessage("現在是第" + String.valueOf(GameInfo.GameStage) + "關");
 		builder.setTitle("加油");
 		builder.setPositiveButton("開始", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-
 				start();
 				dialog.dismiss();
-
 			}
 
 		});
@@ -112,13 +105,10 @@ public class Game extends Activity {
 
 	@Override
 	protected void onStop() {
-		// TODO Auto-generated method stub
+		
 		super.onStop();
-
 		handler.removeCallbacks(gGoRunnable);
-
 		Timer.cancel();
-
 		finish();
 	}
 
@@ -196,8 +186,6 @@ public class Game extends Activity {
 							.getLayoutParams();
 					RelativeLayout.LayoutParams layoutParams1 = (RelativeLayout.LayoutParams) sayTV
 							.getLayoutParams();
-					// 每次往左移進10dp
-					// 再把Layout的參數放回 TextView
 					if (lastgo != wherego) {
 						if (wherego == 1) {
 							button.setBackgroundResource(R.drawable.ic5);
@@ -256,13 +244,11 @@ public class Game extends Activity {
 					}
 					if (y > (winheight - button.getHeight())) {
 						shouldgoDown();
-
 					}
 					if (y < 0) {
 						shouldgoUp();
-
 					}
-				} else {
+					} else {
 
 				}
 
