@@ -28,7 +28,7 @@ public class HighSroce extends Activity {
 
 	void findView(){
 		SroceTV = (TextView)findViewById(R.id.HighTV);
-		SroceTV.setText("²Ä"+String.valueOf(GameInfo.highest)+"Ãö°Õ");
+		SroceTV.setText("ç¬¬"+String.valueOf(GameInfo.highest)+"é—œå•¦");
 		backHomeButton = (Button)findViewById(R.id.backHomeBtn);
 		backHomeButton.setOnClickListener(new OnClickListener() {
 			
