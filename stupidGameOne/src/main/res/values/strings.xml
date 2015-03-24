@@ -12,5 +12,6 @@
     <string name="user_nick_name_sp_3">傳說</string>
     <string name="user_nick_name_def">勇者</string>
     <string name="app_id">1549148035306975</string>
+    <string name="title_activity_arena">ArenaActivity</string>
 
 </resources>

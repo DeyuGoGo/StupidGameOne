@@ -15,13 +15,13 @@ public class EasyMonster extends BaseMonster implements LowLevelMonster{
     }
 
     @Override
-    protected void getFace(ImageView imageView) {
-
+    protected ImageView getFace() {
+        return null;
     }
 
     @Override
-    protected void getSayView(TextView textView) {
-
+    protected TextView getSayView() {
+        return null;
     }
 
     @Override

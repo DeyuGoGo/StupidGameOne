@@ -18,9 +18,9 @@ public abstract class BaseMonster {
         this.Listener = listener;
     }
 
-    protected abstract void getFace(ImageView imageView);
+    protected abstract ImageView getFace();
 
-    protected abstract void getSayView(TextView textView);
+    protected abstract TextView getSayView();
 
     protected boolean isAlive(){
         return HP>0;
