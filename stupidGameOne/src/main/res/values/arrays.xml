@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="user_name_sp">
+        <item>笨蛋</item>
+        <item>菜瓜</item>
+        <item>傳說</item>
+    </string-array>
+</resources>

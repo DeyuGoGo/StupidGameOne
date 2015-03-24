@@ -237,8 +237,6 @@ public class Game extends Activity {
                     if (wherego == 2 || wherego == 3 || wherego == 4) {
                         x = x + GameInfo.GameSpeed;
                     }
-
-
                     if (wherego == 8 || wherego == 7 || wherego == 6) {
                         x = x - GameInfo.GameSpeed;
                     }
@@ -312,8 +310,6 @@ public class Game extends Activity {
             case 8:
                 sayTV.setText("你好像有點弱弱的");
                 break;
-
-
             default:
                 sayTV.setText("登冷～");
                 break;
@@ -332,8 +328,6 @@ public class Game extends Activity {
                 startActivity(it);
                 finish();
             }
-
-
             @Override
             public void onTick(long millisUntilFinished) {
                 {

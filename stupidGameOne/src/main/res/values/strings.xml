@@ -7,6 +7,10 @@
     <string name="title_activity_game">Game</string>
     <string name="title_activity_finish">Finish</string>
     <string name="title_activity_high_sroce">HighSroce</string>
+    <string name="user_nick_name_sp_1">笨蛋</string>
+    <string name="user_nick_name_sp_2">菜瓜</string>
+    <string name="user_nick_name_sp_3">傳說</string>
+    <string name="user_nick_name_def">勇者</string>
     <string name="app_id">1549148035306975</string>
 
 </resources>
