@@ -15,10 +15,11 @@ public abstract class BaseMonster implements Monster{
     protected int Speed;
     public BaseMonster(String name ){
         this.Name = name ;
+        this.FaceImageView = getFace();
+        this.SayTextView = getSayView();
     }
 
     protected abstract ImageView getFace();
-
     protected abstract TextView getSayView();
 
     public void setListener(MonsterListener listener) {
@@ -31,5 +32,10 @@ public abstract class BaseMonster implements Monster{
 
     protected void onDead(){
         if(Listener!=null)Listener.OnDead(this);
+    }
+
+    @Override
+    public ImageView getImage() {
+        return FaceImageView;
     }
 }

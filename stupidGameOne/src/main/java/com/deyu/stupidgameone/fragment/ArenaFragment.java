@@ -1,6 +1,7 @@
 package com.deyu.stupidgameone.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +9,7 @@ import android.view.ViewGroup;
 
 import com.deyu.stupidgameone.R;
 import com.deyu.stupidgameone.arena.BattleArena;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
+import com.deyu.stupidgameone.monster.LowLevelMonsterEnum;
 
 /**
  * Created by huangeyu on 15/3/24.
@@ -24,21 +23,37 @@ public class ArenaFragment extends BaseFragment{
         return rootView;
     }
 
-    @InjectView(R.id.arena) BattleArena mBattleArena;
+//    @InjectView(R.id.arena)
+    BattleArena mBattleArena;
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.inject(view);
+//        ButterKnife.inject(view);
+        mBattleArena = (BattleArena)view.findViewById(R.id.arena);
+        initComponents();
+        initAction();
+        initViewWithValue();
     }
 
 
     @Override
     protected void initComponents() {
+        for(int i = 0 ; i < 100 ; i++){
+            mBattleArena.addLowLevelMonster(LowLevelMonsterEnum.Cockroach);
+        }
     }
 
     @Override
     protected void initAction() {
+        Handler oo = new Handler();
+        oo.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mBattleArena.start();
 
+            }
+        },2000);
     }
 
     @Override
