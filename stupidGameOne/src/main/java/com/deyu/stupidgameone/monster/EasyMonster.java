@@ -6,10 +6,10 @@ import android.widget.TextView;
 /**
  * Created by huangeyu on 15/3/23.
  */
-public class EasyMonster extends BaseMonster implements LowLevelMonster{
+public class EasyMonster extends BaseMonster {
 
-    public EasyMonster(String name , MonsterListener listener , int HP , int Speed) {
-        super(name,listener);
+    public EasyMonster(String name , int HP , int Speed) {
+        super(name);
         this.HP = HP ;
         this.Speed = Speed;
     }

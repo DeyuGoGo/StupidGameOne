@@ -4,7 +4,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
-import com.deyu.stupidgameone.monster.LowLevelMonster;
+import com.deyu.stupidgameone.monster.Monster;
+import com.deyu.stupidgameone.monster.MonsterFactory;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,8 @@ import java.util.ArrayList;
  */
 public abstract class BaseArena extends RelativeLayout{
 
-    protected ArrayList<LowLevelMonster> Monsters = new ArrayList<LowLevelMonster>();
+    protected ArrayList<Monster> Monsters = new ArrayList<Monster>();
+    protected MonsterFactory mMonsterFactory = new MonsterFactory();
 
     public BaseArena(Context context) {
         super(context);
@@ -25,6 +27,10 @@ public abstract class BaseArena extends RelativeLayout{
 
     public BaseArena(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+    }
+
+    protected void checkGamePoint(){
+
     }
 
 }

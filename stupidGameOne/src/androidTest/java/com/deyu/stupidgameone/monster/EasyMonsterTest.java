@@ -19,13 +19,14 @@ public class EasyMonsterTest extends AndroidTestCase {
     public void testGetFace(){
         MonsterListener listener = Mockito.mock(MonsterListener.class);
         final ImageView b = new ImageView(getContext());
-        EasyMonster a = new EasyMonster("Deyu" ,listener , 5 , 1){
+        EasyMonster a = new EasyMonster("Deyu" ,5 , 1){
             @Override
             protected ImageView getFace() {
                 return b;
             }
         };
-        assertSame(b , a.getFace());
+        a.setListener(listener);
+        assertSame(b,a.getFace());
     }
 
 

@@ -130,11 +130,7 @@ public class Game extends Activity {
 
 
     void makewheretogo() {
-
-
         wherego = (int) (Math.random() * 8 + 1); // 數值範圍 : 1 ~ 8
-
-
     }
 
 
@@ -151,7 +147,6 @@ public class Game extends Activity {
             wherego = wherego + 4;
         }
     }
-
 
     void shouldgoUp() {
         wherego = (int) (Math.random() * 5 + 1);

@@ -3,12 +3,22 @@ package com.deyu.stupidgameone.arena;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.deyu.stupidgameone.monster.LowLevelMonster;
+import com.deyu.stupidgameone.monster.BaseMonster;
+import com.deyu.stupidgameone.monster.Monster;
+import com.deyu.stupidgameone.monster.LowLevelMonsterEnum;
+import com.deyu.stupidgameone.monster.MonsterListener;
 
 /**
  * Created by huangeyu on 15/3/24.
  */
 public class DeyuArena extends BaseArena implements BattleArena{
+
+    private MonsterListener Listener = new MonsterListener() {
+        @Override
+        public void OnDead(BaseMonster whoDead) {
+            Monsters.remove(whoDead);
+        }
+    };
 
     public DeyuArena(Context context) {
         super(context);
@@ -23,8 +33,9 @@ public class DeyuArena extends BaseArena implements BattleArena{
     }
 
     @Override
-    public void addLowLevelMonster(LowLevelMonster monster) {
-
+    public void addLowLevelMonster(LowLevelMonsterEnum lowLevelMonsterEnum) {
+        Monster monster = mMonsterFactory.createLowLevelMonster(lowLevelMonsterEnum);
+        Monsters.add(monster);
     }
 
     @Override
@@ -36,4 +47,5 @@ public class DeyuArena extends BaseArena implements BattleArena{
     public void stop() {
 
     }
+
 }
