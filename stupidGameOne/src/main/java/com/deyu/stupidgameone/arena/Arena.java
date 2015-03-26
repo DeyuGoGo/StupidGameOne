@@ -1,41 +1,44 @@
 package com.deyu.stupidgameone.arena;
 
 import android.content.Context;
+import android.graphics.PixelFormat;
 import android.util.AttributeSet;
-import android.widget.RelativeLayout;
-
-import com.deyu.stupidgameone.monster.Monster;
-import com.deyu.stupidgameone.monster.MonsterFactory;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 
 import java.util.ArrayList;
 
 /**
  * Created by huangeyu on 15/3/24.
  */
-public abstract class BaseArena extends RelativeLayout implements BattleArena , ArenaReporterCenter{
+public abstract class Arena extends SurfaceView implements BattleArena , ArenaReporterCenter{
 
-    protected ArrayList<Monster> Monsters = new ArrayList<Monster>();
-    protected MonsterFactory mMonsterFactory ;
-    protected ArrayList<ArenaReporter> mArenaReporters = new ArrayList<ArenaReporter>();
     protected int ArenaHeight , ArenaWidth;
+    protected ArrayList<ArenaReporter> mArenaReporters = new ArrayList<ArenaReporter>();
+    protected SurfaceHolder holder;
 
-    public BaseArena(Context context) {
+    public Arena(Context context) {
         super(context);
         init();
     }
 
-    public BaseArena(Context context, AttributeSet attrs) {
+    public Arena(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public BaseArena(Context context, AttributeSet attrs, int defStyle) {
+    public Arena(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }
     protected void init(){
-        mMonsterFactory = new MonsterFactory(getContext());
+        setZOrderOnTop(true);    // necessary
+        holder = getHolder();
+        holder.addCallback(getSurfaceHolderCallback());
+        holder.setFormat(PixelFormat.TRANSPARENT);
     }
+
+    protected abstract SurfaceHolder.Callback getSurfaceHolderCallback();
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -53,10 +56,5 @@ public abstract class BaseArena extends RelativeLayout implements BattleArena , 
     public void UnRegisterRepoter(ArenaReporter reporter) {
         mArenaReporters.remove(reporter);
     }
-
-    protected void checkGamePoint(){
-
-    }
-
 
 }

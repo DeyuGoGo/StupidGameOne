@@ -1,8 +1,6 @@
 package com.deyu.stupidgameone.monster;
 
 import android.content.Context;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.deyu.stupidgameone.exception.NoMonsterException;
 
@@ -27,18 +25,6 @@ public class MonsterFactory implements MonsterCreater{
         if(lowLevelMonsterEnum==null) {
             throw new NoMonsterException();
         }
-            return new EasyMonster(name,HP,Speed){
-                @Override
-                protected ImageView getFace() {
-                    ImageView iv = new ImageView(mContext);
-                    iv.setImageResource(FaceRes);
-                    return iv;
-                }
-
-                @Override
-                protected TextView getSayView() {
-                    return new TextView(mContext);
-                }
-            };
+            return new EasyMonster(name,HP,Speed,FaceRes);
     }
 }

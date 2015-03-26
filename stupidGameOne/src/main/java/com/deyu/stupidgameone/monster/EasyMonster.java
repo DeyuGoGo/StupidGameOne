@@ -1,8 +1,5 @@
 package com.deyu.stupidgameone.monster;
 
-import android.widget.ImageView;
-import android.widget.TextView;
-
 /**
  * Created by huangeyu on 15/3/23.
  */
@@ -13,22 +10,16 @@ public class EasyMonster extends BaseMonster {
         this.HP = HP ;
         this.Speed = Speed;
     }
+    public EasyMonster(String name , int HP , int Speed , int face) {
+        this(name,HP,Speed);
+        this.FaceImageId = face;
+
+    }
 
     @Override
-    protected ImageView getFace() {
+    protected String getSay() {
         return null;
     }
-
-    @Override
-    protected TextView getSayView() {
-        return null;
-    }
-
-    @Override
-    public String say() {
-        return "Hi";
-    }
-
 
     @Override
     public void feelHurt(int damage) {
