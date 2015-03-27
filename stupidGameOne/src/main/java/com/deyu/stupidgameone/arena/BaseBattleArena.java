@@ -10,6 +10,7 @@ import android.view.SurfaceHolder;
 
 import com.deyu.stupidgameone.monster.LowLevelMonsterEnum;
 import com.deyu.stupidgameone.monster.Monster;
+import com.deyu.stupidgameone.monster.MonsterCreater;
 import com.deyu.stupidgameone.monster.MonsterFace;
 import com.deyu.stupidgameone.monster.MonsterFactory;
 
@@ -19,7 +20,7 @@ import java.util.ArrayList;
  * Created by huangeyu on 15/3/26.
  */
 public abstract class BaseBattleArena extends Arena implements BattleArena{
-    protected MonsterFactory mMonsterFactory ;
+    protected MonsterCreater mMonsterFactory ;
     protected ArrayList<Monster> Monsters = new ArrayList<Monster>();
     protected ArrayList<MonsterFace> mMonsterFaces = new ArrayList<MonsterFace>();
 
@@ -50,7 +51,7 @@ public abstract class BaseBattleArena extends Arena implements BattleArena{
 
     @Override
     public void start() {
-        startDraw();
+        nonUiHandler.post(startDrawRunable);
     }
 
     @Override
@@ -127,4 +128,20 @@ public abstract class BaseBattleArena extends Arena implements BattleArena{
         super.draw(canvas);
         drawMonsters(canvas);
     }
+    private Runnable startDrawRunable = new Runnable() {
+        @Override
+        public void run() {
+            Canvas c = null ;
+            try {
+                c = holder.lockCanvas();
+                synchronized (holder){
+                    draw(c);
+                }
+            }finally {
+                if(c != null)
+                    holder.unlockCanvasAndPost(c);
+            }
+        }
+    };
+
 }
