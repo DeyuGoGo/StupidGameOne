@@ -6,10 +6,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.deyu.stupidgameone.R;
 import com.deyu.stupidgameone.arena.BattleArena;
 import com.deyu.stupidgameone.monster.LowLevelMonsterEnum;
+import com.deyu.stupidgameone.motion.Move;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -27,6 +29,7 @@ public class ArenaFragment extends BaseFragment{
     }
 
     @InjectView(R.id.arena) BattleArena mBattleArena;
+    @InjectView(R.id.test_text_view1) TextView testTextView;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -41,9 +44,7 @@ public class ArenaFragment extends BaseFragment{
 
     @Override
     protected void initComponents() {
-        for(int i = 0 ; i < 100 ; i++){
             mBattleArena.addLowLevelMonster(LowLevelMonsterEnum.Cockroach);
-        }
     }
 
     @Override
@@ -60,7 +61,8 @@ public class ArenaFragment extends BaseFragment{
 
     @Override
     protected void initViewWithValue() {
-
+        Move m = new Move();
+        testTextView.setText(""+m.getWhereToGo(1,1,1,1,1,1,1));
     }
 
 }

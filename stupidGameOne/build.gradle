@@ -8,8 +8,26 @@ android {
         applicationId "com.deyu.stupidgameone"
         minSdkVersion 13
         targetSdkVersion 18
+        ndk{
+            moduleName "Move";
+        }
     }
-
+    sourceSets.main{
+        jni.srcDirs = [] //ndk-build.cmd needs to be invoked from command line
+        jniLibs.srcDir 'src/main/libs'
+    }
+//    productFlavors{
+//        x86{
+//            ndk{abiFilter "x86" }
+//            }
+//        armv7a{
+//            ndk{
+//                abiFilter "armeabi-v7a"
+//            }
+//        }
+//        fat
+//
+//    }
     buildTypes {
         release {
             minifyEnabled false

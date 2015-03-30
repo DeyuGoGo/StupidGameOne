@@ -6,7 +6,7 @@ import com.deyu.stupidgameone.R;
  * Created by huangeyu on 15/3/24.
  */
 public enum LowLevelMonsterEnum {
-    Cockroach(5,1,R.drawable.ic1,"Deyu");
+    Cockroach(5,3,R.drawable.ic1,"Deyu");
 
     private int HP;
     private int Speed;
