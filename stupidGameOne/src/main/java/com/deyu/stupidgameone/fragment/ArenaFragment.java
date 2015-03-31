@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.deyu.stupidgameone.R;
 import com.deyu.stupidgameone.arena.BattleArena;
 import com.deyu.stupidgameone.monster.LowLevelMonsterEnum;
-import com.deyu.stupidgameone.motion.Move;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -44,7 +43,9 @@ public class ArenaFragment extends BaseFragment{
 
     @Override
     protected void initComponents() {
+        for(int i = 0 ; i < 10 ; i++){
             mBattleArena.addLowLevelMonster(LowLevelMonsterEnum.Cockroach);
+        }
     }
 
     @Override
@@ -61,8 +62,7 @@ public class ArenaFragment extends BaseFragment{
 
     @Override
     protected void initViewWithValue() {
-        Move m = new Move();
-        testTextView.setText(""+m.getWhereToGo(1,1,1,1,1,1,1));
+
     }
 
 }

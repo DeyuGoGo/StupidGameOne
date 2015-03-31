@@ -9,6 +9,14 @@ extern "C" {
 #endif
 /*
  * Class:     com_deyu_stupidgameone_motion_Move
+ * Method:    init
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_deyu_stupidgameone_motion_Move_init
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_deyu_stupidgameone_motion_Move
  * Method:    getWhereToGo
  * Signature: (IIIIIII)I
  */

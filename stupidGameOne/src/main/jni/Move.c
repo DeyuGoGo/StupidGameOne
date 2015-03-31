@@ -1,7 +1,23 @@
 #include <com_deyu_stupidgameone_motion_Move.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <Calc.h>
+#include <time.h>
 
 
+static int a = 0;
+
+/*
+ * Class:     com_deyu_stupidgameone_motion_Move
+ * Method:    init
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_deyu_stupidgameone_motion_Move_init
+  (JNIEnv *env, jobject obj){
+  			srand(time(NULL));
+  };
+
+/*
 /*
  * Class:     com_deyu_stupidgameone_motion_Move
  * Method:    getWhereToGo

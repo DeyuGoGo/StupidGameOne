@@ -8,12 +8,13 @@ import com.deyu.stupidgameone.motion.Move;
  * Created by huangeyu on 15/3/23.
  */
 public class EasyMonster extends BaseMonster {
-    private Move m = new Move();
+    private Move m;
 
     public EasyMonster(String name , int HP , int Speed) {
         super(name);
         this.HP = HP ;
         this.Speed = Speed;
+        m = Move.getInstance();
     }
     public EasyMonster(String name , int HP , int Speed , int face) {
         this(name,HP,Speed);

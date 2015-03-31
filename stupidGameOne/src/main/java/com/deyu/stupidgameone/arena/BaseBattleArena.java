@@ -92,10 +92,10 @@ public abstract class BaseBattleArena extends Arena implements BattleArena{
         mMonsterFaces.add(new MonsterFace(monsterImageRes , bmp));
     }
 
-    protected Bitmap getMonsterFace(Monster monster){
+    protected MonsterFace getMonsterFace(Monster monster ){
         int monsterImageRes = monster.getImageRes();
         for(MonsterFace face : mMonsterFaces){
-            if(face.faceRes == monsterImageRes)return face.faceBitmap;
+            if(face.faceRes == monsterImageRes)return face;
         }
         return null;
     }
@@ -133,20 +133,19 @@ public abstract class BaseBattleArena extends Arena implements BattleArena{
         monster.setLocation(new MonsterLocation(x ,y ,1));
     }
     private void initMonsterSize(Monster monster ){
-        Bitmap b = getMonsterFace(monster);
-        monster.setSize(b.getWidth(),b.getHeight());
+        MonsterFace f = getMonsterFace(monster);
+        monster.setSize(f.getWidth(),f.getHeight());
     }
 
     private void DrawMonster(Monster monster, Canvas canvas){
-        Bitmap b = getMonsterFace(monster);
+        MonsterFace f = getMonsterFace(monster);
         MonsterLocation location = monster.getLocation();
+        Bitmap b = getMoveFace(f , location.getRunWhere());
         canvas.drawBitmap(b , location.getX() , location.getY() ,null );
         latch.countDown();
     }
-
-    @Override
-    public void draw(Canvas canvas) {
-        super.draw(canvas);
+    private Bitmap getMoveFace(MonsterFace face, int GoToWhere){
+        return face.faceBitmap[GoToWhere-1];
     }
     private Runnable startDrawRunable = new Runnable() {
         @Override
@@ -161,7 +160,7 @@ public abstract class BaseBattleArena extends Arena implements BattleArena{
             }finally {
                 if(c != null)
                     holder.unlockCanvasAndPost(c);
-                postDelayed(ContinueRunDrawRanable , 3);
+                postDelayed(ContinueRunDrawRanable , 2);
             }
         }
     };
@@ -179,7 +178,7 @@ public abstract class BaseBattleArena extends Arena implements BattleArena{
             }finally {
                 if(c != null)
                     holder.unlockCanvasAndPost(c);
-                postDelayed(this,3);
+                postDelayed(this,2);
             }
         }
     };

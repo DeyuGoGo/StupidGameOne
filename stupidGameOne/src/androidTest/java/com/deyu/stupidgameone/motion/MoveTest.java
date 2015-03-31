@@ -1,6 +1,7 @@
 package com.deyu.stupidgameone.motion;
 
 import android.test.AndroidTestCase;
+import android.util.Log;
 
 import org.junit.Test;
 
@@ -18,8 +19,10 @@ public class MoveTest extends AndroidTestCase{
 
     @Test
     public void testGetWhereToGo(){
-//        int WhereToGO = c.getWhereToGo(1024 , 768 , 300 , 300 , 50 , 50 );
-//        assert
-
+        c.init();
+        for(int i = 0 ; i < 50 ; i ++){
+            int WhereToGO = c.getWhereToGo(1024 , 768 , 1025 , 300 , 50 , 50 , 3);
+            Log.d("DEYU" , "WhereToGo : " + WhereToGO);
+        }
     }
 }
