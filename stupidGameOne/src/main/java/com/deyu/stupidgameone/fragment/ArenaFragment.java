@@ -34,7 +34,6 @@ public class ArenaFragment extends BaseFragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.inject(this ,view);
-//        mBattleArena = (BattleArena)view.findViewById(R.id.arena);
         initComponents();
         initAction();
         initViewWithValue();

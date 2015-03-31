@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.deyu.stupidgameone"
-        minSdkVersion 13
+        minSdkVersion 14
         targetSdkVersion 18
         ndk{
             moduleName "Move";
