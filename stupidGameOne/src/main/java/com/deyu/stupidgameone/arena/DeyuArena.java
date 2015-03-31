@@ -3,6 +3,7 @@ package com.deyu.stupidgameone.arena;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import com.deyu.stupidgameone.GameInfo;
 import com.deyu.stupidgameone.monster.BaseMonster;
 import com.deyu.stupidgameone.monster.MonsterListener;
 
@@ -28,6 +29,7 @@ public class DeyuArena extends BaseBattleArena {
 
     public DeyuArena(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+         GameInfo.oo ok  = new GameInfo.oo();
     }
 
 }

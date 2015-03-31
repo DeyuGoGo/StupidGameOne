@@ -26,6 +26,7 @@ public class MainActivity extends Activity {
     TextView TV1;
     DB DBH;
 
+    public native int getWhereDDGo(int w , int h , int x ,int y ,int imgw,int imgh);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

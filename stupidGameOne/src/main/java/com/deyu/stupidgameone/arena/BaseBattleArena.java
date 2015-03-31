@@ -4,25 +4,28 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.SurfaceHolder;
 
 import com.deyu.stupidgameone.monster.LowLevelMonsterEnum;
 import com.deyu.stupidgameone.monster.Monster;
+import com.deyu.stupidgameone.monster.MonsterCreater;
 import com.deyu.stupidgameone.monster.MonsterFace;
 import com.deyu.stupidgameone.monster.MonsterFactory;
+import com.deyu.stupidgameone.monster.MonsterLocation;
 
 import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * Created by huangeyu on 15/3/26.
  */
 public abstract class BaseBattleArena extends Arena implements BattleArena{
-    protected MonsterFactory mMonsterFactory ;
+    protected MonsterCreater mMonsterFactory ;
     protected ArrayList<Monster> Monsters = new ArrayList<Monster>();
     protected ArrayList<MonsterFace> mMonsterFaces = new ArrayList<MonsterFace>();
-
+    private CountDownLatch latch ;
     public BaseBattleArena(Context context) {
         super(context);
     }
@@ -50,7 +53,9 @@ public abstract class BaseBattleArena extends Arena implements BattleArena{
 
     @Override
     public void start() {
-        startDraw();
+
+
+        nonUiHandler.post(startDrawRunable);
     }
 
     @Override
@@ -87,44 +92,94 @@ public abstract class BaseBattleArena extends Arena implements BattleArena{
         mMonsterFaces.add(new MonsterFace(monsterImageRes , bmp));
     }
 
-    protected Bitmap getMonsterFace(Monster monster){
+    protected MonsterFace getMonsterFace(Monster monster ){
         int monsterImageRes = monster.getImageRes();
         for(MonsterFace face : mMonsterFaces){
-            if(face.faceRes == monsterImageRes)return face.faceBitmap;
+            if(face.faceRes == monsterImageRes)return face;
         }
         return null;
     }
 
-    private void drawMonsters(Canvas canvas){
-        for(Monster monster: Monsters){
-            drawMonster(monster, canvas);
-        }
-    }
-    private void drawMonster(Monster monster , Canvas canvas){
-        Bitmap b = getMonsterFace(monster);
-        Log.d("DEYU ", "ArenaWidth : " + ArenaWidth + " ArenaHeight : " + ArenaHeight);
-        int x = (int) (Math.random() * (ArenaWidth - b.getWidth()));
-        int y = (int) (Math.random() * (ArenaHeight - b.getHeight()));
-        canvas.drawBitmap(b , x , y ,null );
-    }
-
-    private void startDraw(){
-        Canvas c = null ;
+    private void drawMonsters(final Canvas canvas){
+        latch = new CountDownLatch(Monsters.size());
+                    for(final Monster monster: Monsters){
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                DrawMonster(monster, canvas);
+                            }
+                        }).start();
+                    }
         try {
-            c = holder.lockCanvas();
-            synchronized (holder){
-                draw(c);
-            }
-        }finally {
-            if(c != null)
-             holder.unlockCanvasAndPost(c);
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-
+    }
+    private void moveMonsters(){
+        for(Monster monster: Monsters){
+            monster.move(ArenaWidth , ArenaHeight);
+        }
+    }
+    private void initMonsters(){
+        for(Monster monster: Monsters){
+            initMonsterSize(monster);
+            initMonsterLocation(monster);
+        }
+    }
+    private void initMonsterLocation(Monster monster){
+        int x = (int) (Math.random() * (ArenaWidth - monster.getWidth()));
+        int y = (int) (Math.random() * (ArenaHeight - monster.getHeight()));
+        monster.setLocation(new MonsterLocation(x ,y ,1));
+    }
+    private void initMonsterSize(Monster monster ){
+        MonsterFace f = getMonsterFace(monster);
+        monster.setSize(f.getWidth(),f.getHeight());
     }
 
-    @Override
-    public void draw(Canvas canvas) {
-        super.draw(canvas);
-        drawMonsters(canvas);
+    private void DrawMonster(Monster monster, Canvas canvas){
+        MonsterFace f = getMonsterFace(monster);
+        MonsterLocation location = monster.getLocation();
+        Bitmap b = getMoveFace(f , location.getRunWhere());
+        canvas.drawBitmap(b , location.getX() , location.getY() ,null );
+        latch.countDown();
     }
+    private Bitmap getMoveFace(MonsterFace face, int GoToWhere){
+        return face.faceBitmap[GoToWhere-1];
+    }
+    private Runnable startDrawRunable = new Runnable() {
+        @Override
+        public void run() {
+            Canvas c = null ;
+            initMonsters();
+            try {
+                c = holder.lockCanvas();
+                synchronized (holder){
+                    drawMonsters(c);
+                }
+            }finally {
+                if(c != null)
+                    holder.unlockCanvasAndPost(c);
+                postDelayed(ContinueRunDrawRanable , 2);
+            }
+        }
+    };
+    private Runnable ContinueRunDrawRanable = new Runnable() {
+        @Override
+        public void run() {
+            Canvas c = null ;
+            try {
+                c = holder.lockCanvas();
+                c.drawColor(Color.WHITE);
+                synchronized (holder){
+                    moveMonsters();
+                    drawMonsters(c);
+                }
+            }finally {
+                if(c != null)
+                    holder.unlockCanvasAndPost(c);
+                postDelayed(this,2);
+            }
+        }
+    };
 }
