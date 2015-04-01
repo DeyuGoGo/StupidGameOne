@@ -55,8 +55,6 @@ public abstract class BaseBattleArena extends Arena implements BattleArena{
 
     @Override
     public void start() {
-
-
         nonUiHandler.post(startDrawRunable);
     }
 
