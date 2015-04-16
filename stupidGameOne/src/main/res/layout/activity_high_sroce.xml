@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".HighSroce" >
+    tools:context=".HighSroce">
 
     <TextView
         android:id="@+id/HighTV"
@@ -17,26 +17,27 @@
         android:layout_marginTop="114dp"
         android:text="@string/hello_world"
         android:textSize="30sp" />
-        <Button
+
+    <Button
         android:id="@+id/backHomeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/HighTV"
-                android:layout_centerHorizontal="true"
-        
+        android:layout_centerHorizontal="true"
+
         android:layout_marginTop="46dp"
         android:text="回首頁" />
 
     <TextView
+        android:id="@+id/tv_best_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/tv_best_time"
-        android:layout_marginTop="77dp"
         android:layout_below="@+id/backHomeBtn"
         android:layout_centerHorizontal="true"
-        android:visibility="invisible"
-        android:textSize="30sp" />
+        android:layout_marginTop="77dp"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="30sp"
+        android:visibility="invisible" />
 
 </RelativeLayout>

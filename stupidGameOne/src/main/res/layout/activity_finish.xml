@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Finish" >
+    tools:context=".Finish">
 
     <TextView
         android:id="@+id/finish"
@@ -10,16 +10,17 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:textSize="30sp"
-        android:text="@string/hello_world" />
-        <TextView
+        android:text="@string/hello_world"
+        android:textSize="30sp" />
+
+    <TextView
         android:id="@+id/finish1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_above="@+id/finish"
-        android:textSize="30sp"
-        android:text="d" />
+        android:layout_centerHorizontal="true"
+        android:text="d"
+        android:textSize="30sp" />
 
     <Button
         android:id="@+id/backbtn"
@@ -35,10 +36,10 @@
         android:id="@+id/againbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/finish"
-        android:layout_marginTop="20dp"
         android:layout_alignParentRight="true"
+        android:layout_below="@+id/finish"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
         android:text="再來啊" />
 
 </RelativeLayout>

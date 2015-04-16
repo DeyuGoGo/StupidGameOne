@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Game" >
+    tools:context=".Game">
 
     <TextView
         android:id="@+id/textView1"
@@ -17,14 +17,15 @@
         android:layout_marginLeft="1dp"
         android:layout_marginTop="1dp"
         android:visibility="invisible" />
-  <TextView
+
+    <TextView
         android:id="@+id/say"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="1dp"
         android:layout_marginTop="1dp"
-        android:textSize="18sp"
         android:text="你這個笨蛋是點的到還點不到"
+        android:textSize="18sp"
         android:visibility="invisible" />
 
 </RelativeLayout>

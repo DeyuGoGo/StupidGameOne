@@ -3,7 +3,6 @@ package com.deyu.stupidgameone.arena;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.deyu.stupidgameone.GameInfo;
 import com.deyu.stupidgameone.monster.BaseMonster;
 import com.deyu.stupidgameone.monster.MonsterListener;
 

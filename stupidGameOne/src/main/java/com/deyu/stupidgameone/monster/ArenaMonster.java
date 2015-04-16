@@ -7,24 +7,25 @@ import com.deyu.stupidgameone.motion.Move;
 /**
  * Created by huangeyu on 15/3/23.
  */
-public abstract class ArenaMonster extends BaseMonster implements ArenaLocation , NoisyMonster{
+public abstract class ArenaMonster extends BaseMonster implements ArenaLocation, NoisyMonster {
     protected ArenaLocationInfo location;
     private Move m;
 
     public ArenaMonster(String name, int HP, int Speed) {
         super(name);
-        this.HP = HP ;
+        this.HP = HP;
         this.Speed = Speed;
         m = Move.getInstance();
     }
+
     public ArenaMonster(String name, int HP, int Speed, int face) {
-        this(name,HP,Speed);
+        this(name, HP, Speed);
         this.FaceImageId = face;
 
     }
 
     @Override
-    public void move(int ArenaW , int ArenaH) {
+    public void move(int ArenaW, int ArenaH) {
         moveGo();
 //        Log.d("DEYU" , "ArenaW  : " + ArenaW + "\n" +
 //                "ArenaH : " + ArenaH + "\n" +
@@ -34,11 +35,12 @@ public abstract class ArenaMonster extends BaseMonster implements ArenaLocation 
 //        );
         location.setRunWhere(m.getWhereToGo(ArenaW, ArenaH, location.getX(), location.getY(), Width, Height, location.getRunWhere()));
     }
-    private void moveGo(){
+
+    private void moveGo() {
         int wherego = location.getRunWhere();
         int x = location.getX();
         int y = location.getY();
-        int randomspeed = (int)(Math.random() * Speed);
+        int randomspeed = (int) (Math.random() * Speed);
         if (wherego == 2 || wherego == 3 || wherego == 4) {
             x = x + randomspeed;
         }
@@ -54,18 +56,22 @@ public abstract class ArenaMonster extends BaseMonster implements ArenaLocation 
         location.setX(x);
         location.setY(y);
     }
-    @Override
-    public void setLocation(ArenaLocationInfo location) {
-        this.location = location;
-    }
+
     @Override
     public ArenaLocationInfo getLocation() {
         return location;
     }
+
+    @Override
+    public void setLocation(ArenaLocationInfo location) {
+        this.location = location;
+    }
+
     @Override
     public String say() {
         return getSay();
     }
+
     @Override
     protected String getSay() {
         return "打我啊笨蛋";

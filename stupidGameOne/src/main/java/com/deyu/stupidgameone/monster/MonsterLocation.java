@@ -4,17 +4,20 @@ package com.deyu.stupidgameone.monster;
  * Created by huangeyu on 15/3/30.
  */
 public class MonsterLocation {
-    int x ;
-    int y ;
-    int RunWhere ;
-    public MonsterLocation(int x, int y, int RunWhere){
+    int x;
+    int y;
+    int RunWhere;
+
+    public MonsterLocation(int x, int y, int RunWhere) {
         this.x = x;
         this.y = y;
-        this.RunWhere =RunWhere;
+        this.RunWhere = RunWhere;
     }
+
     public int getX() {
         return x;
     }
+
     public void setX(int x) {
         this.x = x;
     }

@@ -13,12 +13,12 @@ import java.util.ArrayList;
 /**
  * Created by huangeyu on 15/3/24.
  */
-public abstract class Arena extends SurfaceView implements ArenaReporterCenter{
+public abstract class Arena extends SurfaceView implements ArenaReporterCenter {
 
-    protected int ArenaHeight , ArenaWidth;
+    protected int ArenaHeight, ArenaWidth;
     protected ArrayList<ArenaReporter> mArenaReporters = new ArrayList<ArenaReporter>();
     protected SurfaceHolder holder;
-    protected HandlerThread mHandlerThread  = null ;
+    protected HandlerThread mHandlerThread = null;
     protected Handler nonUiHandler = null;
 
     public Arena(Context context) {
@@ -35,7 +35,8 @@ public abstract class Arena extends SurfaceView implements ArenaReporterCenter{
         super(context, attrs, defStyle);
         init();
     }
-    protected void init(){
+
+    protected void init() {
         initNonUiThread();
         setZOrderOnTop(true);    // necessary
         holder = getHolder();
@@ -62,31 +63,32 @@ public abstract class Arena extends SurfaceView implements ArenaReporterCenter{
         mArenaReporters.remove(reporter);
     }
 
-    protected void win(){
-        for(ArenaReporter ar : mArenaReporters){
-            ar.Win();;
+    protected void win() {
+        for (ArenaReporter ar : mArenaReporters) {
+            ar.Win();
+            ;
         }
     }
 
-    protected void lose(){
-        for(ArenaReporter ar : mArenaReporters){
+    protected void lose() {
+        for (ArenaReporter ar : mArenaReporters) {
             ar.lose();
         }
     }
 
-    protected void initNonUiThread(){
-        if(mHandlerThread == null){
-            mHandlerThread = new HandlerThread(getClass().getSimpleName()+"DEYU");
+    protected void initNonUiThread() {
+        if (mHandlerThread == null) {
+            mHandlerThread = new HandlerThread(getClass().getSimpleName() + "DEYU");
             mHandlerThread.start();
         }
-        if(nonUiHandler==null) nonUiHandler = new Handler(mHandlerThread.getLooper());
+        if (nonUiHandler == null) nonUiHandler = new Handler(mHandlerThread.getLooper());
     }
 
-    protected void closenonUIThread(){
-        if(nonUiHandler!= null) {
+    protected void closenonUIThread() {
+        if (nonUiHandler != null) {
             nonUiHandler = null;
         }
-        if(mHandlerThread != null) {
+        if (mHandlerThread != null) {
             mHandlerThread.interrupt();
             mHandlerThread = null;
         }

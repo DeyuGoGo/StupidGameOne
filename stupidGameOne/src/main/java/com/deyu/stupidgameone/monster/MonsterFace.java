@@ -10,21 +10,22 @@ public class MonsterFace {
 
     public final int faceRes;
     public final Bitmap[] faceBitmap;
-    public int width ;
-    public int height ;
+    public int width;
+    public int height;
 
-    public MonsterFace(int faceRes , Bitmap facebitmap){
+    public MonsterFace(int faceRes, Bitmap facebitmap) {
         this.faceRes = faceRes;
         this.faceBitmap = new Bitmap[8];
-        this.width = (int)(facebitmap.getWidth() * 0.4);
-        this.height = (int)(facebitmap.getHeight() * 0.4);
+        this.width = (int) (facebitmap.getWidth() * 0.4);
+        this.height = (int) (facebitmap.getHeight() * 0.4);
         initFaces(facebitmap);
     }
-    private void initFaces(Bitmap faceBitmap){
-        for(int i = 0 ; i < 8 ; i++){
+
+    private void initFaces(Bitmap faceBitmap) {
+        for (int i = 0; i < 8; i++) {
             Matrix vMatrix = new Matrix();
-            vMatrix.setRotate( 45*i );
-            Bitmap vB1 = Bitmap.createScaledBitmap(faceBitmap , width , height , true);
+            vMatrix.setRotate(45 * i);
+            Bitmap vB1 = Bitmap.createScaledBitmap(faceBitmap, width, height, true);
             Bitmap vB2 = Bitmap.createBitmap(vB1
                     , 0
                     , 0
@@ -33,7 +34,7 @@ public class MonsterFace {
                     , vMatrix
                     , true
             );
-            this.faceBitmap[i] =vB2;
+            this.faceBitmap[i] = vB2;
         }
     }
 

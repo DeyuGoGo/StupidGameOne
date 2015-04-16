@@ -11,8 +11,8 @@ import com.deyu.stupidgameone.R;
 /**
  * Created by huangeyu on 15/3/24.
  */
-public abstract class BaseFragment extends Fragment{
-    protected FragmentManager mFragmentManager ;
+public abstract class BaseFragment extends Fragment {
+    protected FragmentManager mFragmentManager;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -22,20 +22,24 @@ public abstract class BaseFragment extends Fragment{
         initAction();
         initViewWithValue();
     }
-    private void init(){
-        mFragmentManager= getActivity().getSupportFragmentManager();
+
+    private void init() {
+        mFragmentManager = getActivity().getSupportFragmentManager();
     }
 
     protected abstract void initComponents();
+
     protected abstract void initAction();
+
     protected abstract void initViewWithValue();
-    protected void changeFragment(Fragment fragment , boolean isNeedBackStack){
+
+    protected void changeFragment(Fragment fragment, boolean isNeedBackStack) {
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
         // Replace whatever is in the fragment_container view with this fragment,
         // and add the transaction to the back stack so the user can navigate back
         transaction
                 .replace(R.id.fragment_container, fragment);
-        if(isNeedBackStack)transaction.addToBackStack(null);
+        if (isNeedBackStack) transaction.addToBackStack(null);
         // Commit the transaction
         transaction.commit();
     }

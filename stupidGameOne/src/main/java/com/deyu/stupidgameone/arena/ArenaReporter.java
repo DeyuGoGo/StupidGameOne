@@ -5,5 +5,6 @@ package com.deyu.stupidgameone.arena;
  */
 public interface ArenaReporter {
     public void Win();
+
     public void lose();
 }
