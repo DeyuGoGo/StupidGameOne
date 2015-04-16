@@ -14,6 +14,6 @@
         android:id="@+id/test_text_view1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TESTING"/>
+        android:text="天啊 好噁"/>
 
 </RelativeLayout>
