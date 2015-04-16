@@ -11,9 +11,13 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 public class HighSroce extends Activity {
 
 	TextView SroceTV;
+    @InjectView(R.id.tv_best_time)TextView BestTimeTv;
 	Button backHomeButton;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,7 @@ public class HighSroce extends Activity {
 	        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 	        WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_high_sroce);
+        ButterKnife.inject(this);
 		findView();
 		
 	}
@@ -29,12 +34,13 @@ public class HighSroce extends Activity {
 	void findView(){
 		SroceTV = (TextView)findViewById(R.id.HighTV);
 		SroceTV.setText("第"+String.valueOf(GameInfo.highest)+"關啦");
+        if(GameInfo.highest > 6) BestTimeTv.setVisibility(View.VISIBLE);
+        BestTimeTv.setText("最快" +getTimeString() +"啦");
 		backHomeButton = (Button)findViewById(R.id.backHomeBtn);
 		backHomeButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Intent it= new Intent();
 				it.setClass(HighSroce.this, MainActivity.class);
 				startActivity(it);
@@ -42,6 +48,10 @@ public class HighSroce extends Activity {
 			}
 		});
 	}
+    private String getTimeString(){
+        return GameInfo.bestTime/1000 + "秒" + GameInfo.bestTime%1000;
+    }
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

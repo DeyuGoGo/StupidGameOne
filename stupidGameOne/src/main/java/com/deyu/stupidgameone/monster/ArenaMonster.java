@@ -38,17 +38,18 @@ public abstract class ArenaMonster extends BaseMonster implements ArenaLocation 
         int wherego = location.getRunWhere();
         int x = location.getX();
         int y = location.getY();
+        int randomspeed = (int)(Math.random() * Speed);
         if (wherego == 2 || wherego == 3 || wherego == 4) {
-            x = x + Speed;
+            x = x + randomspeed;
         }
         if (wherego == 8 || wherego == 7 || wherego == 6) {
-            x = x - Speed;
+            x = x - randomspeed;
         }
         if (wherego == 8 || wherego == 1 || wherego == 2) {
-            y = y - Speed;
+            y = y - randomspeed;
         }
         if (wherego == 6 || wherego == 5 || wherego == 4) {
-            y = y + Speed;
+            y = y + randomspeed;
         }
         location.setX(x);
         location.setY(y);
@@ -65,9 +66,8 @@ public abstract class ArenaMonster extends BaseMonster implements ArenaLocation 
     public String say() {
         return getSay();
     }
-
     @Override
     protected String getSay() {
-        return "Hi I'm ArenaMonster";
+        return "打我啊笨蛋";
     }
 }

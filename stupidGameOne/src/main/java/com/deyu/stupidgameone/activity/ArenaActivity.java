@@ -17,7 +17,7 @@ public class ArenaActivity extends FragmentActivity {
         setContentView(R.layout.activity_arena);
         // Check that the activity is using the layout version with
         // the fragment_container FrameLayout
-        if (findViewById(R.id.container) != null) {
+        if (findViewById(R.id.fragment_container) != null) {
 
             // However, if we're being restored from a previous state,
             // then we don't need to do anything and should return or else
@@ -35,7 +35,7 @@ public class ArenaActivity extends FragmentActivity {
 
             // Add the fragment to the 'fragment_container' FrameLayout
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, firstFragment).commit();
+                    .add(R.id.fragment_container, firstFragment).commit();
         }
 
     }

@@ -16,19 +16,20 @@ public class MonsterFace {
     public MonsterFace(int faceRes , Bitmap facebitmap){
         this.faceRes = faceRes;
         this.faceBitmap = new Bitmap[8];
-        this.width = facebitmap.getWidth();
-        this.height = facebitmap.getHeight();
+        this.width = (int)(facebitmap.getWidth() * 0.4);
+        this.height = (int)(facebitmap.getHeight() * 0.4);
         initFaces(facebitmap);
     }
     private void initFaces(Bitmap faceBitmap){
         for(int i = 0 ; i < 8 ; i++){
             Matrix vMatrix = new Matrix();
             vMatrix.setRotate( 45*i );
-            Bitmap vB2 = Bitmap.createBitmap(faceBitmap
+            Bitmap vB1 = Bitmap.createScaledBitmap(faceBitmap , width , height , true);
+            Bitmap vB2 = Bitmap.createBitmap(vB1
                     , 0
                     , 0
-                    , faceBitmap.getWidth()   // 寬度
-                    , faceBitmap.getHeight()  // 高度
+                    , vB1.getWidth()   // 寬度
+                    , vB1.getHeight()  // 高度
                     , vMatrix
                     , true
             );

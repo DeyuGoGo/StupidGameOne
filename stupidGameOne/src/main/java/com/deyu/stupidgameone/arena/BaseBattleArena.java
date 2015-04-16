@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -13,9 +14,11 @@ import android.view.SurfaceHolder;
 import com.deyu.stupidgameone.monster.ArenaMonster;
 import com.deyu.stupidgameone.monster.ArenaMonsterCreater;
 import com.deyu.stupidgameone.monster.ArenaMonsterFactory;
+import com.deyu.stupidgameone.monster.BaseMonster;
 import com.deyu.stupidgameone.monster.LowLevelMonsterEnum;
 import com.deyu.stupidgameone.monster.Monster;
 import com.deyu.stupidgameone.monster.MonsterFace;
+import com.deyu.stupidgameone.monster.MonsterListener;
 
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
@@ -23,10 +26,13 @@ import java.util.concurrent.CountDownLatch;
 /**
  * Created by huangeyu on 15/3/26.
  */
-public abstract class BaseBattleArena extends Arena implements BattleArena{
+public abstract class BaseBattleArena extends Arena implements BattleArena , MonsterListener {
     protected ArenaMonsterCreater mMonsterFactory ;
+    protected BaseMonster deadmonster = null;
     protected ArrayList<ArenaMonster> Monsters = new ArrayList<ArenaMonster>();
     protected ArrayList<MonsterFace> mMonsterFaces = new ArrayList<MonsterFace>();
+    protected boolean run = false;
+    protected Paint TextPaint ;
     private CountDownLatch latch ;
     public BaseBattleArena(Context context) {
         super(context);
@@ -44,23 +50,31 @@ public abstract class BaseBattleArena extends Arena implements BattleArena{
     protected void init() {
         super.init();
         mMonsterFactory = new ArenaMonsterFactory(getContext());
+        setSayPaint();
     }
 
     @Override
     public void addLowLevelMonster(LowLevelMonsterEnum lowLevelMonsterEnum) {
         ArenaMonster monster = mMonsterFactory.createArenaMonster(lowLevelMonsterEnum);
+        monster.setListener(this);
         Monsters.add(monster);
         addMonsetFace(monster);
     }
 
     @Override
     public void start() {
+        run = true;
         nonUiHandler.post(startDrawRunable);
     }
 
     @Override
-    public void stop() {
+    public void resume() {
+        run = true;
+    }
 
+    @Override
+    public void stop() {
+        run = false;
     }
 
     @Override
@@ -101,20 +115,15 @@ public abstract class BaseBattleArena extends Arena implements BattleArena{
     }
 
     private void drawMonsters(final Canvas canvas){
-        latch = new CountDownLatch(Monsters.size());
+//        latch = new CountDownLatch(Monsters.size());
                     for(final ArenaMonster monster: Monsters){
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
                                 DrawMonster(monster, canvas);
-                            }
-                        }).start();
                     }
-        try {
-            latch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            latch.await();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
     private void moveMonsters(){
         for(ArenaMonster monster: Monsters){
@@ -130,7 +139,7 @@ public abstract class BaseBattleArena extends Arena implements BattleArena{
     private void initMonsterLocation(ArenaMonster monster){
         int x = (int) (Math.random() * (ArenaWidth - monster.getWidth()));
         int y = (int) (Math.random() * (ArenaHeight - monster.getHeight()));
-        monster.setLocation(new ArenaLocationInfo(x, y, 1));
+        monster.setLocation(new ArenaLocationInfo(x, y, (int)(Math.random()*8)+1));
     }
     private void initMonsterSize(ArenaMonster monster ){
         MonsterFace f = getMonsterFace(monster);
@@ -142,8 +151,21 @@ public abstract class BaseBattleArena extends Arena implements BattleArena{
         ArenaLocationInfo location = monster.getLocation();
         Bitmap b = getMoveFace(f, location.getRunWhere());
         canvas.drawBitmap(b , location.getX() , location.getY() ,null );
-        latch.countDown();
+//        DrawMosterSay(monster , location , b.getWidth()  , canvas);
+//        latch.countDown();
     }
+    private void DrawMosterSay(ArenaMonster monster , ArenaLocationInfo locationInfo, int MonsterW , Canvas canvas){
+//        Rect Bonds = new Rect();
+//        TextPaint.getTextBounds(monster.say() , 0 , monster.say().length() , Bonds);
+//        int wordH = Bonds.height();
+//        int wordW = Bonds.width();
+//        int wrodX =
+//                wordW - MonsterW +
+//                locationInfo.getX();
+//        int wrodY = locationInfo.getY() - wordH;
+//        canvas.drawText(monster.say() , wrodX,wrodY,TextPaint);
+    }
+
     private Bitmap getMoveFace(MonsterFace face, int GoToWhere){
         return face.faceBitmap[GoToWhere-1];
     }
@@ -170,15 +192,18 @@ public abstract class BaseBattleArena extends Arena implements BattleArena{
             Canvas c = null ;
             try {
                 c = holder.lockCanvas();
+                if(c == null)return;
                 c.drawColor(Color.WHITE);
                 synchronized (holder){
+                    killMonster();
                     moveMonsters();
                     drawMonsters(c);
                 }
             }finally {
                 if(c != null)
                     holder.unlockCanvasAndPost(c);
-                postDelayed(this,10);
+                checkGamePoint();
+                if(run)postDelayed(this,10);
             }
         }
     };
@@ -200,7 +225,7 @@ public abstract class BaseBattleArena extends Arena implements BattleArena{
         for(ArenaMonster monster : Monsters){
             boolean beHit = checkHitMonster(x , y , monster);
             if(!beHit)continue;
-            Log.d("Deyu"  , "feelHurt(10)");
+            Log.d("Deyu"  , "feelHurt(1)");
             monster.feelHurt(10);
         }
     }
@@ -215,4 +240,26 @@ public abstract class BaseBattleArena extends Arena implements BattleArena{
         return true;
     }
 
+    @Override
+    public void OnDead(BaseMonster whoDead) {
+        deadmonster = whoDead;
+    }
+    private void killMonster(){
+        if(deadmonster !=null){
+            int deadIndex = Monsters.indexOf(deadmonster);
+            if(deadIndex>=0)Monsters.remove(deadIndex);
+            deadmonster = null;
+        }
+    }
+    private void checkGamePoint(){
+        if(Monsters.size()<=0){
+            win();
+            stop();
+        }
+    }
+    private void setSayPaint(){
+//        TextPaint = new Paint();
+//        TextPaint.setColor(Color.BLACK);
+//        TextPaint.setTextSize(20);
+    }
 }
