@@ -29,7 +29,6 @@ public class DeyuArena extends BaseBattleArena {
 
     public DeyuArena(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-         GameInfo.oo ok  = new GameInfo.oo();
     }
 
 }

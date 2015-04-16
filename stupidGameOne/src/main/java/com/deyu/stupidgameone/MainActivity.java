@@ -17,6 +17,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.deyu.stupidgameone.activity.ArenaActivity;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
+
 public class MainActivity extends Activity {
 
     Button StartButton,highButton,exitButton ;
@@ -25,6 +31,17 @@ public class MainActivity extends Activity {
     static boolean firsttime = true;
     TextView TV1;
     DB DBH;
+    @InjectView(R.id.btn_arena) Button ArenaBtn;
+    @OnClick(R.id.btn_arena)
+    public void gotoArena(){
+        Intent it= new Intent();
+        GameInfo.GameSpeed=1;
+        GameInfo.GameStage=0;
+        GameInfo.GameTime=GameInfo.GameDefaultTime;
+        it.setClass(MainActivity.this, ArenaActivity.class);
+        startActivity(it);
+        finish();
+    }
 
     public native int getWhereDDGo(int w , int h , int x ,int y ,int imgw,int imgh);
 
@@ -35,6 +52,7 @@ public class MainActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+        ButterKnife.inject(this);
         mContext =this;
         DBH = new DB(mContext);
         firsttime();
@@ -45,13 +63,11 @@ public class MainActivity extends Activity {
 
     private void firsttime(){
         DBH.open();
-        if(firsttime){
-            DBH.create(1);
-            firsttime = false;
-        }
         Cursor ccc =  DBH.get(1);
         int i =  ccc.getInt(1);
+        int i2 =  ccc.getInt(2) == 0 ? (int)GameInfo.GameDefaultTime : ccc.getInt(2);
         GameInfo.highest = i;
+        GameInfo.bestTime = i2;
         DBH.close();
     }
     void username(){
@@ -78,6 +94,7 @@ public class MainActivity extends Activity {
         highButton = (Button)findViewById(R.id.highBtn);
         exitButton=(Button)findViewById(R.id.exitbtn);
         TV1=(TextView)findViewById(R.id.textView1);
+        if(GameInfo.highest > 6) ArenaBtn.setVisibility(View.VISIBLE);
     }
     void setButtonClick(){
         StartButton.setOnClickListener(new OnClickListener() {
@@ -97,8 +114,6 @@ public class MainActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                // TODO Auto-generated method stub
                 Intent it= new Intent();
                 it.setClass(MainActivity.this, HighSroce.class);
                 startActivity(it);

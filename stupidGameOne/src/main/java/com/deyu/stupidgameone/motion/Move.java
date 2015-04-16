@@ -12,7 +12,6 @@ public class Move {
     }
 
     private Move() {
-        init();
     }
     public native int init();
     public native int getWhereToGo(int w , int h , int x ,int y ,int imgw,int imgh , int whereToGo);

@@ -61,8 +61,6 @@ public class Game extends Activity {
 
     void gamebegin() {
         AlertDialog.Builder builder = new Builder(Game.this);
-
-
         builder.setMessage("每一關只有五秒的時間懂嗎");
         builder.setTitle("用點擊消滅罪惡");
         builder.setPositiveButton("準備好了",
@@ -97,8 +95,6 @@ public class Game extends Activity {
         });
         builder.setCancelable(false);
         builder.create().show();
-
-
     }
 
 

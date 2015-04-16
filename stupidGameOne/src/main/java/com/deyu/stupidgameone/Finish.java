@@ -34,9 +34,8 @@ public class Finish extends Activity {
         int a = GameInfo.GameStage;
         if(a>GameInfo.highest){
             DBH.open();
-            DBH.update(1, a);
+            DBH.updateGameCount(1, a);
             DBH.close();
-
             GameInfo.highest=a;
         }
         String resStage = "第"+String.valueOf(a)+"關";

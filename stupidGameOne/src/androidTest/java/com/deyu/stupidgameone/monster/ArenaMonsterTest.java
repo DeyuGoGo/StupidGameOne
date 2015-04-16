@@ -10,13 +10,13 @@ import org.mockito.Mockito;
 /**
  * Created by huangeyu on 15/3/24.
  */
-public class EasyMonsterTest extends AndroidTestCase {
-    EasyMonster a ;
+public class ArenaMonsterTest extends AndroidTestCase {
+    ArenaMonster a ;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        a = new EasyMonster("Deyu" ,5 , 1  , R.drawable.ic);
+        a = new ArenaMonster("Deyu" ,5 , 1  , R.drawable.ic);
     }
     @Test
     public void testisAlive(){

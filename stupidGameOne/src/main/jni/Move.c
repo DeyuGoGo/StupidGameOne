@@ -15,6 +15,7 @@ static int a = 0;
 JNIEXPORT jint JNICALL Java_com_deyu_stupidgameone_motion_Move_init
   (JNIEnv *env, jobject obj){
   			srand(time(NULL));
+  			return 1;
   };
 
 /*

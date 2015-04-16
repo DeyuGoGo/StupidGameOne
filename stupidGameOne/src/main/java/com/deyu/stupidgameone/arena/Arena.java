@@ -62,6 +62,18 @@ public abstract class Arena extends SurfaceView implements ArenaReporterCenter{
         mArenaReporters.remove(reporter);
     }
 
+    protected void win(){
+        for(ArenaReporter ar : mArenaReporters){
+            ar.Win();;
+        }
+    }
+
+    protected void lose(){
+        for(ArenaReporter ar : mArenaReporters){
+            ar.lose();
+        }
+    }
+
     protected void initNonUiThread(){
         if(mHandlerThread == null){
             mHandlerThread = new HandlerThread(getClass().getSimpleName()+"DEYU");
