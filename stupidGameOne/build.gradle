@@ -1,0 +1,64 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        applicationId "com.deyu.stupidgameone"
+        minSdkVersion 14
+        targetSdkVersion 18
+        ndk{
+            moduleName "Move";
+        }
+    }
+    sourceSets.main{
+        jni.srcDirs = [] //ndk-build.cmd needs to be invoked from command line
+        jniLibs.srcDir 'src/main/libs'
+    }
+//    productFlavors{
+//        x86{
+//            ndk{abiFilter "x86" }
+//            }
+//        armv7a{
+//            ndk{
+//                abiFilter "armeabi-v7a"
+//            }
+//        }
+//        fat
+//
+//    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+    lintOptions {
+        abortOnError false;
+        disable 'InvalidPackage'            //Some libraries have issues with this.
+        disable 'OldTargetApi'              //Lint gives this warning but SDK 20 would be Android L Beta.
+        disable 'IconDensities'             //For testing purpose. This is safe to remove.
+        disable 'IconMissingDensityFolder'  //For testing purpose. This is safe to remove.
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:19.1.0'
+    compile 'com.android.support:appcompat-v7:19.1.0'
+    compile 'com.jakewharton:butterknife:6.1.0'
+    // Espresso
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
+    androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
+    androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
+    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
+    androidTestCompile 'org.mockito:mockito-core:2.0.5-beta'
+    compile 'com.facebook.android:facebook-android-sdk:3.23.1'
+}
