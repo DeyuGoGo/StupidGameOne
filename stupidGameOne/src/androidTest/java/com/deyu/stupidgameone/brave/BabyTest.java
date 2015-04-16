@@ -7,7 +7,7 @@ import org.junit.Test;
 /**
  * Created by huangeyu on 15/3/23.
  */
-public class BabyTest extends AndroidTestCase{
+public class BabyTest extends AndroidTestCase {
 
     @Override
     protected void setUp() throws Exception {
@@ -15,11 +15,11 @@ public class BabyTest extends AndroidTestCase{
     }
 
     @Test
-    public void testWhatIsMyName()throws Exception{
+    public void testWhatIsMyName() throws Exception {
         String name = "Deyu";
         Novice a = new Baby(name);
         assertNotNull(a.WhatIsMyName());
-        assertEquals(a.WhatIsMyName() , name);
+        assertEquals(a.WhatIsMyName(), name);
     }
 
 }

@@ -5,5 +5,6 @@ package com.deyu.stupidgameone.arena;
  */
 public interface ArenaReporterCenter {
     public void RegisterRepoter(ArenaReporter reporter);
+
     public void UnRegisterRepoter(ArenaReporter reporter);
 }

@@ -1,8 +1,6 @@
 package com.deyu.stupidgameone;
 
 
-
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -25,25 +23,27 @@ import butterknife.OnClick;
 
 public class MainActivity extends Activity {
 
-    Button StartButton,highButton,exitButton ;
+    static boolean firsttime = true;
+    Button StartButton, highButton, exitButton;
     Context mContext;
     String usernameString;
-    static boolean firsttime = true;
     TextView TV1;
     DB DBH;
-    @InjectView(R.id.btn_arena) Button ArenaBtn;
+    @InjectView(R.id.btn_arena)
+    Button ArenaBtn;
+
     @OnClick(R.id.btn_arena)
-    public void gotoArena(){
-        Intent it= new Intent();
-        GameInfo.GameSpeed=1;
-        GameInfo.GameStage=0;
-        GameInfo.GameTime=GameInfo.GameDefaultTime;
+    public void gotoArena() {
+        Intent it = new Intent();
+        GameInfo.GameSpeed = 1;
+        GameInfo.GameStage = 0;
+        GameInfo.GameTime = GameInfo.GameDefaultTime;
         it.setClass(MainActivity.this, ArenaActivity.class);
         startActivity(it);
         finish();
     }
 
-    public native int getWhereDDGo(int w , int h , int x ,int y ,int imgw,int imgh);
+    public native int getWhereDDGo(int w, int h, int x, int y, int imgw, int imgh);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class MainActivity extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
-        mContext =this;
+        mContext = this;
         DBH = new DB(mContext);
         firsttime();
         findXmlView();
@@ -61,17 +61,18 @@ public class MainActivity extends Activity {
         setButtonClick();
     }
 
-    private void firsttime(){
+    private void firsttime() {
         DBH.open();
-        Cursor ccc =  DBH.get(1);
-        int i =  ccc.getInt(1);
-        int i2 =  ccc.getInt(2) == 0 ? (int)GameInfo.GameDefaultTime : ccc.getInt(2);
+        Cursor ccc = DBH.get(1);
+        int i = ccc.getInt(1);
+        int i2 = ccc.getInt(2) == 0 ? (int) GameInfo.GameDefaultTime : ccc.getInt(2);
         GameInfo.highest = i;
         GameInfo.bestTime = i2;
         DBH.close();
     }
-    void username(){
-        switch ((int)(Math.random() * 15 + 1)) {
+
+    void username() {
+        switch ((int) (Math.random() * 15 + 1)) {
             case 3:
                 usernameString = "笨蛋";
                 break;
@@ -85,26 +86,27 @@ public class MainActivity extends Activity {
                 usernameString = "勇者";
                 break;
         }
-        TV1.setText(usernameString+"，早安你好");
+        TV1.setText(usernameString + "，早安你好");
     }
 
 
-    void findXmlView(){
-        StartButton = (Button)findViewById(R.id.startbutton);
-        highButton = (Button)findViewById(R.id.highBtn);
-        exitButton=(Button)findViewById(R.id.exitbtn);
-        TV1=(TextView)findViewById(R.id.textView1);
-        if(GameInfo.highest > 6) ArenaBtn.setVisibility(View.VISIBLE);
+    void findXmlView() {
+        StartButton = (Button) findViewById(R.id.startbutton);
+        highButton = (Button) findViewById(R.id.highBtn);
+        exitButton = (Button) findViewById(R.id.exitbtn);
+        TV1 = (TextView) findViewById(R.id.textView1);
+        if (GameInfo.highest > 6) ArenaBtn.setVisibility(View.VISIBLE);
     }
-    void setButtonClick(){
+
+    void setButtonClick() {
         StartButton.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent it= new Intent();
-                GameInfo.GameSpeed=1;
-                GameInfo.GameStage=0;
+                Intent it = new Intent();
+                GameInfo.GameSpeed = 1;
+                GameInfo.GameStage = 0;
                 it.setClass(MainActivity.this, Game.class);
                 startActivity(it);
                 finish();
@@ -114,7 +116,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                Intent it= new Intent();
+                Intent it = new Intent();
                 it.setClass(MainActivity.this, HighSroce.class);
                 startActivity(it);
                 finish();
@@ -125,7 +127,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Toast.makeText(mContext, "看來你不是"+usernameString+"，晚安", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "看來你不是" + usernameString + "，晚安", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

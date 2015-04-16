@@ -22,26 +22,26 @@ import butterknife.OnClick;
  */
 public class FinishFragment extends BaseFragment {
 
-    private int gameSecond ;
-    private int gamemillinSecond ;
     DB DBH;
+    @InjectView(R.id.finish_data)
+    TextView mDataTextView;
+    @InjectView(R.id.finish_des)
+    TextView mDescribeTextView;
+    private int gameSecond;
+    private int gamemillinSecond;
 
     @OnClick(R.id.backbtn)
-    public void back(){
+    public void back() {
         Intent it = new Intent();
         it.setClass(getActivity(), MainActivity.class);
         startActivity(it);
         getActivity().finish();
     }
+
     @OnClick(R.id.againbtn)
-    public void again(){
-        changeFragment(new ArenaFragment() , false);
+    public void again() {
+        changeFragment(new ArenaFragment(), false);
     }
-
-    @InjectView(R.id.finish_data)TextView mDataTextView;
-
-    @InjectView(R.id.finish_des)TextView mDescribeTextView;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,12 +61,12 @@ public class FinishFragment extends BaseFragment {
     protected void initComponents() {
         DBH = new DB(getActivity());
         DBH.open();
-        int Gametime = (int)GameInfo.GameTime;
-        if(Gametime<GameInfo.bestTime){
+        int Gametime = (int) GameInfo.GameTime;
+        if (Gametime < GameInfo.bestTime) {
             DBH.open();
             DBH.updateGameTime(1, Gametime);
             DBH.close();
-            GameInfo.highest=Gametime;
+            GameInfo.highest = Gametime;
         }
         initSecond(GameInfo.GameTime);
     }
@@ -81,21 +81,23 @@ public class FinishFragment extends BaseFragment {
         mDescribeTextView.setText(getTimeDesString());
     }
 
-    private String getTimeDataString(){
+    private String getTimeDataString() {
         return gameSecond + "秒" + gamemillinSecond;
     }
-    private String getTimeDesString(){
-            if(gameSecond<5)return "幹，\n你作弊吧。";
-            if(gameSecond<10)return "怎麼可能，\n你是何方神聖。";
-            if(gameSecond<15)return "好像很快，\n其實不過就這樣而已。";
-            if(gameSecond<20)return "有點廢。";
-            if(gameSecond<25)return "大概是\n用腳完的速度。";
-            if(gameSecond<30)return "你的手反應速度\n比蝸牛還慢啊。";
+
+    private String getTimeDesString() {
+        if (gameSecond < 5) return "幹，\n你作弊吧。";
+        if (gameSecond < 10) return "怎麼可能，\n你是何方神聖。";
+        if (gameSecond < 15) return "好像很快，\n其實不過就這樣而已。";
+        if (gameSecond < 20) return "有點廢。";
+        if (gameSecond < 25) return "大概是\n用腳完的速度。";
+        if (gameSecond < 30) return "你的手反應速度\n比蝸牛還慢啊。";
         return "痾，廢物";
     }
-    private void initSecond(long gameTime){
-        gameSecond = (int)(gameTime/1000);
-        gamemillinSecond = (int)(gameTime% 1000);
+
+    private void initSecond(long gameTime) {
+        gameSecond = (int) (gameTime / 1000);
+        gamemillinSecond = (int) (gameTime % 1000);
     }
 
 

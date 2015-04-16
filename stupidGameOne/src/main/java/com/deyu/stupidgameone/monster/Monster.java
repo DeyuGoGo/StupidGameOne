@@ -5,6 +5,8 @@ package com.deyu.stupidgameone.monster;
  */
 public interface Monster {
     public void feelHurt(int damage);
-    public void move(int ArenaW , int ArenaH);
+
+    public void move(int ArenaW, int ArenaH);
+
     public int getImageRes();
 }

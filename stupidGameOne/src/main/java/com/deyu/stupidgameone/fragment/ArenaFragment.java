@@ -21,8 +21,12 @@ import butterknife.InjectView;
 /**
  * Created by huangeyu on 15/3/24.
  */
-public class ArenaFragment extends BaseFragment implements ArenaReporter{
+public class ArenaFragment extends BaseFragment implements ArenaReporter {
 
+    @InjectView(R.id.arena)
+    BattleArena mBattleArena;
+    @InjectView(R.id.test_text_view1)
+    TextView testTextView;
     private long GameStartTime = 0;
 
     @Override
@@ -32,19 +36,16 @@ public class ArenaFragment extends BaseFragment implements ArenaReporter{
         return rootView;
     }
 
-    @InjectView(R.id.arena) BattleArena mBattleArena;
-    @InjectView(R.id.test_text_view1) TextView testTextView;
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.inject(this ,view);
+        ButterKnife.inject(this, view);
     }
 
 
     @Override
     protected void initComponents() {
-        for(int i = 0 ; i < 20 ; i++){
+        for (int i = 0; i < 20; i++) {
             mBattleArena.addLowLevelMonster(LowLevelMonsterEnum.Cockroach);
         }
         mBattleArena.RegisterRepoter(this);
@@ -80,7 +81,7 @@ public class ArenaFragment extends BaseFragment implements ArenaReporter{
     @Override
     public void Win() {
         GameInfo.GameTime = System.currentTimeMillis() - GameStartTime;
-        changeFragment(new FinishFragment(),false);
+        changeFragment(new FinishFragment(), false);
     }
 
     @Override

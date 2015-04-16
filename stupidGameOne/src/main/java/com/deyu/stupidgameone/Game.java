@@ -36,159 +36,7 @@ public class Game extends Activity {
     Context mContext;
 
 
-    private int winwidth , winheight;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // 設定為全螢幕
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        mContext = this;
-        setContentView(R.layout.activity_game);
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        winwidth = metrics.widthPixels;
-        winheight = metrics.heightPixels;
-        findview();
-        gamebegin();
-        // startdia();
-
-
-    }
-
-
-    void gamebegin() {
-        AlertDialog.Builder builder = new Builder(Game.this);
-        builder.setMessage("每一關只有五秒的時間懂嗎");
-        builder.setTitle("用點擊消滅罪惡");
-        builder.setPositiveButton("準備好了",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startdia();
-                        dialog.dismiss();
-                    }
-
-
-                });
-        builder.setCancelable(false);
-        builder.create().show();
-    }
-
-
-    void startdia() {
-        gonextstep = 0;
-        GameInfo.GameStage++;
-        AlertDialog.Builder builder = new Builder(Game.this);
-        builder.setMessage("現在是第" + String.valueOf(GameInfo.GameStage) + "關");
-        builder.setTitle("加油");
-        builder.setPositiveButton("開始", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                start();
-                dialog.dismiss();
-            }
-
-
-        });
-        builder.setCancelable(false);
-        builder.create().show();
-    }
-
-
-    void start() {
-        newMon();
-        handler = new Handler();
-        makewheretogo();
-        // findview();
-        alwaysrun();
-        countdown1();
-        Timer.start();
-    }
-
-
-    @Override
-    protected void onStop() {
-
-        super.onStop();
-        handler.removeCallbacks(gGoRunnable);
-        Timer.cancel();
-        finish();
-    }
-
-
-    void findview() {
-        sayTV = (TextView) findViewById(R.id.say);
-        TV = (TextView) findViewById(R.id.textView1);
-    }
-
-
-    void makewheretogo() {
-        wherego = (int) (Math.random() * 8 + 1); // 數值範圍 : 1 ~ 8
-    }
-
-
-    void shouldgoRight() {
-        wherego = (int) (Math.random() * 5 + 1);
-    }
-
-
-    void shouldgoLeft() {
-        wherego = (int) (Math.random() * 5);
-        if (wherego == 0) {
-            wherego = 1;
-        } else {
-            wherego = wherego + 4;
-        }
-    }
-
-    void shouldgoUp() {
-        wherego = (int) (Math.random() * 5 + 1);
-        if (wherego > 3) {
-            wherego = wherego + 3;
-        }
-    }
-
-
-    void shouldgoDown() {
-        wherego = (int) (Math.random() * 5 + 1);
-        wherego = wherego + 2;
-    }
-
-
-    void alwaysrun() {
-        handler.postDelayed(gGoRunnable, 3);
-    }
-
-
-    void newMon() {
-        button = (Button) findViewById(R.id.button1);
-        sayTV.setVisibility(View.VISIBLE);
-        button.setVisibility(View.VISIBLE);
-        button.setBackgroundResource(R.drawable.ic);
-        button.setHeight(50);
-        button.setWidth(50);
-        x = (int) (Math.random() * (winwidth - button.getWidth()));
-        y = (int) ((Math.random() * (winheight - button.getHeight())));
-        button.setOnTouchListener(new OnTouchListener() {
-            @SuppressLint("ClickableViewAccessibility")
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) { // 按下的時候
-                    sayTV.setVisibility(View.INVISIBLE);
-                    button.setVisibility(View.INVISIBLE);
-                    startdia();
-                    Timer.cancel();
-                    GameInfo.GameSpeed++;
-                }
-                return false;
-            }
-        });
-    }
-
-
+    private int winwidth, winheight;
     private Runnable gGoRunnable = new Runnable() {
         @Override
         public void run() {
@@ -273,6 +121,144 @@ public class Game extends Activity {
         }
     };
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // 設定為全螢幕
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        mContext = this;
+        setContentView(R.layout.activity_game);
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        winwidth = metrics.widthPixels;
+        winheight = metrics.heightPixels;
+        findview();
+        gamebegin();
+        // startdia();
+
+
+    }
+
+    void gamebegin() {
+        AlertDialog.Builder builder = new Builder(Game.this);
+        builder.setMessage("每一關只有五秒的時間懂嗎");
+        builder.setTitle("用點擊消滅罪惡");
+        builder.setPositiveButton("準備好了",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startdia();
+                        dialog.dismiss();
+                    }
+
+
+                });
+        builder.setCancelable(false);
+        builder.create().show();
+    }
+
+    void startdia() {
+        gonextstep = 0;
+        GameInfo.GameStage++;
+        AlertDialog.Builder builder = new Builder(Game.this);
+        builder.setMessage("現在是第" + String.valueOf(GameInfo.GameStage) + "關");
+        builder.setTitle("加油");
+        builder.setPositiveButton("開始", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                start();
+                dialog.dismiss();
+            }
+
+
+        });
+        builder.setCancelable(false);
+        builder.create().show();
+    }
+
+    void start() {
+        newMon();
+        handler = new Handler();
+        makewheretogo();
+        // findview();
+        alwaysrun();
+        countdown1();
+        Timer.start();
+    }
+
+    @Override
+    protected void onStop() {
+
+        super.onStop();
+        handler.removeCallbacks(gGoRunnable);
+        Timer.cancel();
+        finish();
+    }
+
+    void findview() {
+        sayTV = (TextView) findViewById(R.id.say);
+        TV = (TextView) findViewById(R.id.textView1);
+    }
+
+    void makewheretogo() {
+        wherego = (int) (Math.random() * 8 + 1); // 數值範圍 : 1 ~ 8
+    }
+
+    void shouldgoRight() {
+        wherego = (int) (Math.random() * 5 + 1);
+    }
+
+    void shouldgoLeft() {
+        wherego = (int) (Math.random() * 5);
+        if (wherego == 0) {
+            wherego = 1;
+        } else {
+            wherego = wherego + 4;
+        }
+    }
+
+    void shouldgoUp() {
+        wherego = (int) (Math.random() * 5 + 1);
+        if (wherego > 3) {
+            wherego = wherego + 3;
+        }
+    }
+
+    void shouldgoDown() {
+        wherego = (int) (Math.random() * 5 + 1);
+        wherego = wherego + 2;
+    }
+
+    void alwaysrun() {
+        handler.postDelayed(gGoRunnable, 3);
+    }
+
+    void newMon() {
+        button = (Button) findViewById(R.id.button1);
+        sayTV.setVisibility(View.VISIBLE);
+        button.setVisibility(View.VISIBLE);
+        button.setBackgroundResource(R.drawable.ic);
+        button.setHeight(50);
+        button.setWidth(50);
+        x = (int) (Math.random() * (winwidth - button.getWidth()));
+        y = (int) ((Math.random() * (winheight - button.getHeight())));
+        button.setOnTouchListener(new OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) { // 按下的時候
+                    sayTV.setVisibility(View.INVISIBLE);
+                    button.setVisibility(View.INVISIBLE);
+                    startdia();
+                    Timer.cancel();
+                    GameInfo.GameSpeed++;
+                }
+                return false;
+            }
+        });
+    }
 
     void talktouser() {
         int sayint = (int) (Math.random() * 8 + 1); // 數值範圍 : 1
@@ -319,6 +305,7 @@ public class Game extends Activity {
                 startActivity(it);
                 finish();
             }
+
             @Override
             public void onTick(long millisUntilFinished) {
                 {

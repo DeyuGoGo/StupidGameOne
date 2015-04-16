@@ -13,8 +13,8 @@ import android.widget.TextView;
 
 public class Finish extends Activity {
 
-    TextView TV,TVTOP;
-    Button againbtn,backButton ;
+    TextView TV, TVTOP;
+    Button againbtn, backButton;
     DB DBH;
 
     @Override
@@ -28,55 +28,57 @@ public class Finish extends Activity {
         findview();
         btnview();
     }
-    void findview(){
-        TV = (TextView)findViewById(R.id.finish);
-        TVTOP=(TextView)findViewById(R.id.finish1);
+
+    void findview() {
+        TV = (TextView) findViewById(R.id.finish);
+        TVTOP = (TextView) findViewById(R.id.finish1);
         int a = GameInfo.GameStage;
-        if(a>GameInfo.highest){
+        if (a > GameInfo.highest) {
             DBH.open();
             DBH.updateGameCount(1, a);
             DBH.close();
-            GameInfo.highest=a;
+            GameInfo.highest = a;
         }
-        String resStage = "第"+String.valueOf(a)+"關";
-        if(a<2){
-            TVTOP.setText("居然只有"+resStage);
+        String resStage = "第" + String.valueOf(a) + "關";
+        if (a < 2) {
+            TVTOP.setText("居然只有" + resStage);
             TV.setText("真沒用！");
         }
-        if(a==2||a==3){
+        if (a == 2 || a == 3) {
             TVTOP.setText(resStage);
             TV.setText("算是反應遲鈍的人類吧");
         }
 //		if(a==4){
 //			TV.setText(resStage+"你也不過就楊承的實力");
 //		}
-        if(a>=4){
+        if (a >= 4) {
             TVTOP.setText("你也不過就");
-            TV.setText("第"+String.valueOf(GameInfo.GameStage)+"關的實力");
+            TV.setText("第" + String.valueOf(GameInfo.GameStage) + "關的實力");
         }
-        if(a>6){
+        if (a > 6) {
             TVTOP.setText(resStage);
             TV.setText("並不值得驕矜自滿");
         }
-        if(a>8){
+        if (a > 8) {
             TVTOP.setText(resStage);
             TV.setText("哎喲，這個，屌屌的");
         }
-        if(a>12){
+        if (a > 12) {
             TVTOP.setText(resStage);
             TV.setText("我真不敢相信，你居然有此境界。");
         }
     }
-    void btnview(){
-        againbtn = (Button)findViewById(R.id.againbtn);
-        backButton = (Button)findViewById(R.id.backbtn);
+
+    void btnview() {
+        againbtn = (Button) findViewById(R.id.againbtn);
+        backButton = (Button) findViewById(R.id.backbtn);
         againbtn.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent it= new Intent();
-                GameInfo.GameSpeed=1;
-                GameInfo.GameStage=0;
+                Intent it = new Intent();
+                GameInfo.GameSpeed = 1;
+                GameInfo.GameStage = 0;
                 it.setClass(Finish.this, Game.class);
                 startActivity(it);
                 finish();
@@ -87,7 +89,7 @@ public class Finish extends Activity {
 
             @Override
             public void onClick(View v) {
-                Intent it= new Intent();
+                Intent it = new Intent();
                 it.setClass(Finish.this, MainActivity.class);
                 startActivity(it);
                 finish();

@@ -6,14 +6,14 @@ import com.deyu.stupidgameone.R;
  * Created by huangeyu on 15/3/24.
  */
 public enum LowLevelMonsterEnum {
-    Cockroach(5,20,R.drawable.ic1,"Deyu");
+    Cockroach(5, 20, R.drawable.ic1, "Deyu");
 
     private int HP;
     private int Speed;
     private int FaceRes;
     private String Name;
 
-    private LowLevelMonsterEnum(int HP , int Speed ,int FaceRes ,  String Name){
+    private LowLevelMonsterEnum(int HP, int Speed, int FaceRes, String Name) {
         this.HP = HP;
         this.Speed = Speed;
         this.FaceRes = FaceRes;

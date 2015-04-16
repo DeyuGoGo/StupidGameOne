@@ -6,7 +6,8 @@ package com.deyu.stupidgameone.brave;
 // Basic Brave should have a Name
 public abstract class Brave {
     protected final String Name;
-    public Brave(String name){
+
+    public Brave(String name) {
         this.Name = name;
     }
 }

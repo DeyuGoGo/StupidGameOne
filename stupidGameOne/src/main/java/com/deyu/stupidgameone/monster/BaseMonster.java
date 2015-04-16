@@ -3,7 +3,7 @@ package com.deyu.stupidgameone.monster;
 /**
  * Created by huangeyu on 15/3/23.
  */
-public abstract class BaseMonster implements Monster ,MonsterBody{
+public abstract class BaseMonster implements Monster, MonsterBody {
 
     protected final String Name;
     protected MonsterListener Listener;
@@ -13,20 +13,20 @@ public abstract class BaseMonster implements Monster ,MonsterBody{
     protected int Width;
     protected int Height;
 
-    public BaseMonster(String name ){
-        this.Name = name ;
+    public BaseMonster(String name) {
+        this.Name = name;
     }
 
     public void setListener(MonsterListener listener) {
         Listener = listener;
     }
 
-    protected boolean isAlive(){
-        return HP>0;
+    protected boolean isAlive() {
+        return HP > 0;
     }
 
-    protected void onDead(){
-        if(Listener!=null)Listener.OnDead(this);
+    protected void onDead() {
+        if (Listener != null) Listener.OnDead(this);
     }
 
     protected abstract String getSay();
@@ -39,8 +39,8 @@ public abstract class BaseMonster implements Monster ,MonsterBody{
     @Override
     public void feelHurt(int damage) {
         HP -= damage;
-        if(HP<0){
-            HP=0;
+        if (HP < 0) {
+            HP = 0;
             onDead();
         }
     }

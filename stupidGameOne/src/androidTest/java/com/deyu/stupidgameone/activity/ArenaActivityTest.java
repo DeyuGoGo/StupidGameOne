@@ -11,11 +11,11 @@ import org.junit.Test;
 /**
  * Created by huangeyu on 15/3/24.
  */
-public class ArenaActivityTest extends ActivityInstrumentationTestCase2<ArenaActivity>{
+public class ArenaActivityTest extends ActivityInstrumentationTestCase2<ArenaActivity> {
 
     ArenaActivity mArenaActivity;
 
-    public ArenaActivityTest(){
+    public ArenaActivityTest() {
         super(ArenaActivity.class);
     }
 
@@ -30,7 +30,7 @@ public class ArenaActivityTest extends ActivityInstrumentationTestCase2<ArenaAct
     }
 
     @Test
-    public void testCheckFirstFragment()throws Exception{
+    public void testCheckFirstFragment() throws Exception {
         Fragment f = mArenaActivity.getSupportFragmentManager().findFragmentById(R.id.container);
         assertNotNull(f);
         assertTrue(f instanceof ArenaFragment);

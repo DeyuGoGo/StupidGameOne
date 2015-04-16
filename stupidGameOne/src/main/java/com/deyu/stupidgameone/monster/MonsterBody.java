@@ -5,7 +5,9 @@ package com.deyu.stupidgameone.monster;
  */
 public interface MonsterBody {
     //    Monster Body
-    public void setSize(int width , int height);
+    public void setSize(int width, int height);
+
     public int getWidth();
+
     public int getHeight();
 }

@@ -9,7 +9,7 @@ import com.deyu.stupidgameone.motion.Move;
 /**
  * Created by huangeyu on 15/3/31.
  */
-public class app extends Application implements Application.ActivityLifecycleCallbacks{
+public class app extends Application implements Application.ActivityLifecycleCallbacks {
 
     @Override
     public void onCreate() {
