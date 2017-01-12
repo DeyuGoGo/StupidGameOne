@@ -15,17 +15,17 @@ import com.deyu.stupidgameone.arena.ArenaReporter;
 import com.deyu.stupidgameone.arena.BattleArena;
 import com.deyu.stupidgameone.monster.LowLevelMonsterEnum;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by huangeyu on 15/3/24.
  */
 public class ArenaFragment extends BaseFragment implements ArenaReporter {
 
-    @InjectView(R.id.arena)
+    @BindView(R.id.arena)
     BattleArena mBattleArena;
-    @InjectView(R.id.test_text_view1)
+    @BindView(R.id.test_text_view1)
     TextView testTextView;
     private long GameStartTime = 0;
 
@@ -39,7 +39,7 @@ public class ArenaFragment extends BaseFragment implements ArenaReporter {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
     }
 
 

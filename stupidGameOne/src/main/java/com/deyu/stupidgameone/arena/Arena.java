@@ -66,7 +66,6 @@ public abstract class Arena extends SurfaceView implements ArenaReporterCenter {
     protected void win() {
         for (ArenaReporter ar : mArenaReporters) {
             ar.Win();
-            ;
         }
     }
 

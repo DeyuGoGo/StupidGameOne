@@ -13,8 +13,8 @@ import com.deyu.stupidgameone.GameInfo;
 import com.deyu.stupidgameone.MainActivity;
 import com.deyu.stupidgameone.R;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 /**
@@ -23,9 +23,9 @@ import butterknife.OnClick;
 public class FinishFragment extends BaseFragment {
 
     DB DBH;
-    @InjectView(R.id.finish_data)
+    @BindView(R.id.finish_data)
     TextView mDataTextView;
-    @InjectView(R.id.finish_des)
+    @BindView(R.id.finish_des)
     TextView mDescribeTextView;
     private int gameSecond;
     private int gamemillinSecond;
@@ -53,7 +53,7 @@ public class FinishFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
     }
 
 

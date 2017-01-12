@@ -11,13 +11,13 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class HighSroce extends Activity {
 
     TextView SroceTV;
-    @InjectView(R.id.tv_best_time)
+    @BindView(R.id.tv_best_time)
     TextView BestTimeTv;
     Button backHomeButton;
 
@@ -28,7 +28,7 @@ public class HighSroce extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_high_sroce);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         findView();
 
     }

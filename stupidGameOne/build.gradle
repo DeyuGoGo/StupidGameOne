@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 25
+    buildToolsVersion '25.0.1'
 
     defaultConfig {
         applicationId "com.deyu.stupidgameone"
-        minSdkVersion 14
-        targetSdkVersion 18
+        minSdkVersion 18
+        targetSdkVersion 25
         ndk {
             moduleName "Move";
         }
@@ -52,14 +52,19 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.1.0'
-    compile 'com.android.support:appcompat-v7:19.1.0'
-    compile 'com.jakewharton:butterknife:6.1.0'
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:design:25.1.0'
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     // Espresso
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
-    androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
-    androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
-    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
-    androidTestCompile 'org.mockito:mockito-core:2.0.5-beta'
-    compile 'com.facebook.android:facebook-android-sdk:3.23.1'
+    testCompile 'junit:junit:4.12'
+    androidTestCompile 'org.mockito:mockito-core:2.2.9'
+    androidTestCompile 'com.android.support:support-annotations:25.1.0'
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestCompile 'com.android.support.test:rules:0.5'
+    androidTestCompile 'com.crittercism.dexmaker:dexmaker:1.4'
+    androidTestCompile 'com.crittercism.dexmaker:dexmaker-dx:1.4'
+    androidTestCompile 'com.crittercism.dexmaker:dexmaker-mockito:1.4'
+
 }

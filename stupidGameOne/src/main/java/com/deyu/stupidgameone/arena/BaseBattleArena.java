@@ -29,8 +29,8 @@ import java.util.concurrent.CountDownLatch;
 public abstract class BaseBattleArena extends Arena implements BattleArena, MonsterListener {
     protected ArenaMonsterCreater mMonsterFactory;
     protected BaseMonster deadmonster = null;
-    protected ArrayList<ArenaMonster> Monsters = new ArrayList<ArenaMonster>();
-    protected ArrayList<MonsterFace> mMonsterFaces = new ArrayList<MonsterFace>();
+    protected ArrayList<ArenaMonster> Monsters = new ArrayList<>();
+    protected ArrayList<MonsterFace> mMonsterFaces = new ArrayList<>();
     protected boolean run = false;
     private Runnable ContinueRunDrawRanable = new Runnable() {
         @Override
@@ -89,7 +89,6 @@ public abstract class BaseBattleArena extends Arena implements BattleArena, Mons
     protected void init() {
         super.init();
         mMonsterFactory = new ArenaMonsterFactory(getContext());
-        setSayPaint();
     }
 
     @Override
@@ -154,15 +153,9 @@ public abstract class BaseBattleArena extends Arena implements BattleArena, Mons
     }
 
     private void drawMonsters(final Canvas canvas) {
-//        latch = new CountDownLatch(Monsters.size());
         for (final ArenaMonster monster : Monsters) {
             DrawMonster(monster, canvas);
         }
-//        try {
-//            latch.await();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
     }
 
     private void moveMonsters() {
@@ -267,9 +260,4 @@ public abstract class BaseBattleArena extends Arena implements BattleArena, Mons
         }
     }
 
-    private void setSayPaint() {
-//        TextPaint = new Paint();
-//        TextPaint.setColor(Color.BLACK);
-//        TextPaint.setTextSize(20);
-    }
 }

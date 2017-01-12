@@ -17,8 +17,8 @@ import android.widget.Toast;
 
 import com.deyu.stupidgameone.activity.ArenaActivity;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 public class MainActivity extends Activity {
@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
     String usernameString;
     TextView TV1;
     DB DBH;
-    @InjectView(R.id.btn_arena)
+    @BindView(R.id.btn_arena)
     Button ArenaBtn;
 
     @OnClick(R.id.btn_arena)
@@ -43,8 +43,6 @@ public class MainActivity extends Activity {
         finish();
     }
 
-    public native int getWhereDDGo(int w, int h, int x, int y, int imgw, int imgh);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +50,7 @@ public class MainActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         mContext = this;
         DBH = new DB(mContext);
         firsttime();
@@ -145,6 +143,5 @@ public class MainActivity extends Activity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        com.facebook.Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
     }
 }

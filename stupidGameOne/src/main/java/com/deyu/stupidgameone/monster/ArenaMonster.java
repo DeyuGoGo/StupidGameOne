@@ -27,12 +27,6 @@ public abstract class ArenaMonster extends BaseMonster implements ArenaLocation,
     @Override
     public void move(int ArenaW, int ArenaH) {
         moveGo();
-//        Log.d("DEYU" , "ArenaW  : " + ArenaW + "\n" +
-//                "ArenaH : " + ArenaH + "\n" +
-//                "location.getX() : " + location.getX() + "\n" +
-//                "location.getY() : " + location.getY() + "\n" +
-//                "location.getRunWhere() " + location.getRunWhere()
-//        );
         location.setRunWhere(m.getWhereToGo(ArenaW, ArenaH, location.getX(), location.getY(), Width, Height, location.getRunWhere()));
     }
 
